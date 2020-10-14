@@ -1,14 +1,14 @@
 import json
-from serverless-demo.user import get_user
-
+from user import get_user
+from adduser import add_user
 
 def hello(event, context):
 
     data = json.loads(event["body"])  
-    userID = data["userId"]  
+    userID = data["userId"]
 
+    get_user(userID)
 
-    print(userID)
     #print(event["body"]["userID"]) #was ich in der console sehe
     body = {
         "message": "Go Serverless v1.0! Your function executed successfully!",
@@ -30,3 +30,15 @@ def hello(event, context):
         "event": event
     }
     """
+
+def handler2(event, context):
+
+    data = json.loads(event["body"])  
+    userID = data["userId"]
+
+    get_user(userID)
+
+    response = {
+        "statusCode": 200,
+    }
+    return response
