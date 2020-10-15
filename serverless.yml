@@ -54,6 +54,12 @@ functions:
       - http:
           path: /
           method: post
+  handler2:
+    handler: handler.handler2
+    events:
+      - http:
+          path: /add
+          method: post
 
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
