@@ -7,20 +7,15 @@ def hello(event, context):
     data = json.loads(event["body"])  
     userID = data["userId"]
 
-    get_user(userID)
+    user = get_user(userID)
 
     #print(event["body"]["userID"]) #was ich in der console sehe
     body = {
-        "message": "Go Serverless v1.0! Your function executed successfully!",
+        "message": user,
         "input": event
     }
 
-    response = {
-        "statusCode": 200,
-        "body": json.dumps(body)
-    }
-
-    return response #was der client zurueckbekommt
+    return body #was der client zurueckbekommt
 
     # Use this code if you don't use the http event with the LAMBDA-PROXY
     # integration
@@ -35,8 +30,9 @@ def handler2(event, context):
 
     data = json.loads(event["body"])  
     userID = data["userId"]
+    userName = data["name"]
 
-    get_user(userID)
+    add_user(userID, userName)
 
     response = {
         "statusCode": 200,
