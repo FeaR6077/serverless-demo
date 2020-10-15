@@ -47,6 +47,7 @@ def handler2(event, context):
     return response
 
 def handler3(event,context):
+
     data = json.loads(event["body"])  
     userID = data["userId"]
     delete_user(userID)
