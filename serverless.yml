@@ -60,6 +60,12 @@ functions:
       - http:
           path: /add
           method: post
+  handler3:
+    handler: handler.handler3
+    events:
+      - http:
+          path: /delete
+          method: post
 
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
