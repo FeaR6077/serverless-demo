@@ -1,7 +1,5 @@
 import json
-from user import get_user
-from adduser import add_user
-from deleteuser import delete_user
+from user.user import *
 
 
 def hello(event, context):
@@ -9,8 +7,8 @@ def hello(event, context):
     data = json.loads(event["body"])  
     userID = data["userId"]
 
-    user = get_user(userID)
-
+    user = User.get_user(userID)
+    print(user)
     #print(event["body"]["userID"]) #was ich in der console sehe
     
     body = {
@@ -34,11 +32,15 @@ def handler2(event, context):
     userID = data["userId"]
     userName = data["name"]
 
-    add_user(userID, userName)
-
-    body = {
-        "message": "you added " +userName 
-    }
+    if User.get_user(userID) == False:
+        User.add_user(userID, userName)
+        body = {
+        "message": "you added "+ user["name"] 
+        }
+    else:
+        body = {
+            "message": "ID already taken"
+        }
 
     response = {
         "body": json.dumps(body),
@@ -50,7 +52,8 @@ def handler3(event,context):
 
     data = json.loads(event["body"])  
     userID = data["userId"]
-    delete_user(userID)
+    User.delete_user(userID)
+
 
     body = {
         "message": "you deleted user"+ userID
